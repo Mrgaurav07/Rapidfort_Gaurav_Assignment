@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "4000:3000"
+    networks:
+      - app-network
+    environment:
+      - PORT=3000
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5001:5001"
+    networks:
+      - app-network
+    environment:
+      - PORT=5001
+    depends_on:
+      - backend
+
+networks:
+  app-network:
+    driver: bridge
